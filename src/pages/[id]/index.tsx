@@ -3,7 +3,7 @@ import App from "../../UI/App";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import Box from "@mui/material/Box";
-import { applyLocalConfig, setLiveId, setTheme } from "../../store/configSlice";
+import { applyLocalConfig, setLiveId, setTheme, setLiveType, setPumpRoom } from "../../store/configSlice";
 import { colorToString } from "../../paid/theme";
 
 export default function () {
@@ -11,11 +11,21 @@ export default function () {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const theme = searchParams.get("theme");
+  const liveType = searchParams.get("liveType");
+  const pumpRoom = searchParams.get("pumpRoom");
   const bilibiliCode = searchParams.get('Code') || searchParams.get('code')
   // @ts-ignore
   window.bilibiliCode = bilibiliCode;
   dispatch(setLiveId(parseInt(id as string)));
   dispatch(setTheme(theme));
+  if (liveType) {
+    // @ts-ignore
+    dispatch(setLiveType(liveType));
+  }
+  if (pumpRoom) {
+    // @ts-ignore
+    dispatch(setPumpRoom(pumpRoom));
+  }
   dispatch(applyLocalConfig());
 
   const { liveId } = useSelector((state: RootState) => state.config);

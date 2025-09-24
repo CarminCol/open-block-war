@@ -169,7 +169,7 @@ export default function Rule() {
   ];
 
   const GiftsCardList = () => {
-    let gifts = [];
+    let gifts: typeof bilibiliGifts | typeof douyuGifts = [];
     switch (liveType) {
       case "bilibili":
         gifts = bilibiliGifts;

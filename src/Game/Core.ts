@@ -1,22 +1,23 @@
-import CardController from "../Card/Controller";
-import Block from "../Components/Block";
-import GameTime from "../Components/GameTime";
-import Map from "../Components/Map";
-import { MessageToast } from "../Components/MessageToast";
-import Player from "../Components/Player";
-import Team from "../Components/Team";
-import BilibiliLive from "../Live/Bilibili";
-import DouyuLive from "../Live/Douyu";
-import { store } from "../store";
-import { ConfigState } from "../store/configSlice";
-import { setTeams, updateTeams, setWinTeam } from "../store/rootSlice";
-import { setTodayMvpUsers } from "../store/topSlice";
+import CardController from '../Card/Controller';
+import Block from '../Components/Block';
+import GameTime from '../Components/GameTime';
+import Map from '../Components/Map';
+import { MessageToast } from '../Components/MessageToast';
+import Player from '../Components/Player';
+import Team from '../Components/Team';
+import BilibiliLive from '../Live/Bilibili';
+import DouyuLive from '../Live/Douyu';
+import PumpLive from '../Live/Pump';
+import { store } from '../store';
+import { ConfigState } from '../store/configSlice';
+import { setTeams, setWinTeam, updateTeams } from '../store/rootSlice';
+import { setTodayMvpUsers } from '../store/topSlice';
 
 export default class Core {
   map: Map | undefined;
   config: ConfigState | undefined;
   teams: Team[] = [];
-  live: BilibiliLive | DouyuLive;
+  live: BilibiliLive | DouyuLive | PumpLive;
   isGameOver = false;
   toast: MessageToast | undefined;
 
@@ -27,10 +28,12 @@ export default class Core {
 
   constructor(public game: Phaser.Game, public scene: Phaser.Scene) {
     const config = store.getState().config;
-    if (config.liveType === "bilibili") {
+    if (config.liveType === 'bilibili') {
       this.live = new BilibiliLive(store.getState().config.liveId);
-    } else {
+    } else if (config.liveType === 'douyu') {
       this.live = new DouyuLive(store.getState().config.liveId);
+    } else {
+      this.live = new PumpLive(store.getState().config.pumpRoom || '');
     }
   }
 
@@ -86,9 +89,9 @@ export default class Core {
     this.toast = new MessageToast(this.scene, {
       x: this.scene.renderer.width / 2,
       y: this.scene.renderer.height - 40,
-      text: this.scene.add.text(0, 0, "", {
-        fontSize: "30px",
-        stroke: "#000",
+      text: this.scene.add.text(0, 0, '', {
+        fontSize: '30px',
+        stroke: '#000',
         strokeThickness: 5,
       }),
       duration: {

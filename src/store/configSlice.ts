@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import GameTime from "../Components/GameTime";
-import paid from "../paid";
+import { createSlice } from '@reduxjs/toolkit';
+import GameTime from '../Components/GameTime';
+import paid from '../paid';
 
 export interface FarmConfig {
   rate: number;
@@ -70,14 +70,15 @@ export interface ConfigState {
     level: number;
   };
   autoJoin: boolean;
-  liveType: "bilibili" | "douyu";
+  liveType: 'bilibili' | 'douyu' | 'pump';
+  pumpRoom?: string;
 }
 
 const initialState: ConfigState = {
-  gameName: "",
+  gameName: '',
   teams: [],
   liveId: 1439885,
-  theme: "default",
+  theme: 'default',
   styleTheme: {},
   gifts: {},
   endTime: 900,
@@ -86,19 +87,26 @@ const initialState: ConfigState = {
     level: 0,
   },
   autoJoin: false,
-  liveType: "bilibili",
+  liveType: 'bilibili',
+  pumpRoom: undefined,
 };
 
 export const configSlice = createSlice({
-  name: "live",
+  name: 'live',
   initialState,
   reducers: {
     setLiveId: (state, action) => {
       const liveIdConfig = paid.getLiveIdPaidConfig(action.payload);
       if (liveIdConfig) {
         state.liveId = liveIdConfig.id;
-        state.liveType = liveIdConfig.liveType ?? "bilibili";
+        state.liveType = liveIdConfig.liveType ?? 'bilibili';
       }
+    },
+    setLiveType: (state, action) => {
+      state.liveType = action.payload;
+    },
+    setPumpRoom: (state, action) => {
+      state.pumpRoom = action.payload ?? undefined;
     },
     setTheme: (state, action) => {
       const liveIdConfig = paid.getLiveIdPaidConfig(state.liveId);
@@ -138,6 +146,12 @@ export const configSlice = createSlice({
   },
 });
 
-export const { setLiveId, setTheme, applyLocalConfig } = configSlice.actions;
+export const {
+  setLiveId,
+  setTheme,
+  applyLocalConfig,
+  setLiveType,
+  setPumpRoom,
+} = configSlice.actions;
 
 export default configSlice.reducer;

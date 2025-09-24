@@ -1,0 +1,11 @@
+receive 0{"sid":"VvAd5y23NthYI6ETABMs","upgrades":[],"pingInterval":25000,"pingTimeout":300000,"maxPayload":1000000}
+send 40{"origin":"https://pump.fun","timestamp":1758743723973,"token":null}
+receive 40{"sid":"QTXae92LFONFQ0J4ABMt"}
+send 420["joinRoom",{"roomId":"EpxanDRMd9iDEYdozB2CBV6tuS5mnYqBLuXrRbNcpump","username":""}]
+receive 42["setCookie",{"name":"livechat_room","value":"EpxanDRMd9iDEYdozB2CBV6tuS5mnYqBLuXrRbNcpump","maxAge":86400}]
+receive 42["newMessage",{"id":"b3afbe8f-b34c-4eb2-a0c7-cded30489c5e","roomId":"EpxanDRMd9iDEYdozB2CBV6tuS5mnYqBLuXrRbNcpump","username":"745tHuAaro1np8AqZuvCTGSUksQdCXgtei9GFnYwvka","userAddress":"745tHuAaro1np8AqZuvCTGSUksQdCXgtei9GFnYwvka","message":"Stand","profile_image":"https://pump.mypinata.cloud/ipfs/QmeSzchzEPqCU1jwTnsipwcBAeH7S4bmVvFGfF65iA1BY1","timestamp":"2025-09-24T20:16:10.598Z","messageType":"REGULAR"}]
+send 42["messageReceived",{"messageId":"6e65bdff-24bd-4c68-8b8f-57465fe0d623"}]
+receive 42["newMessage",{"id":"28ac1d69-019b-42d5-a727-51856fadf385","roomId":"EpxanDRMd9iDEYdozB2CBV6tuS5mnYqBLuXrRbNcpump","username":"munyanyooo","userAddress":"4KKBt73PmCEamWjCqbCqRV5d4VwRE38XK3yACxuzSxAs","message":"join99","profile_image":"https://pump.mypinata.cloud/ipfs/QmeSzchzEPqCU1jwTnsipwcBAeH7S4bmVvFGfF65iA1BY1","timestamp":"2025-09-24T20:16:38.164Z","messageType":"REGULAR"}]
+send 42["messageReceived",{"messageId":"28ac1d69-019b-42d5-a727-51856fadf385"}]
+receive 2
+send 3
